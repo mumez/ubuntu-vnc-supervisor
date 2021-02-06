@@ -46,7 +46,7 @@ RUN mkdir -p $NO_VNC_HOME/utils/websockify && \
   ln -s $NO_VNC_HOME/vnc_lite.html $NO_VNC_HOME/index.html
 
 # add self.pem file if you force ssl only access 
-COPY ./cert/*.pem $NO_VNC_HOME/utils/websockify
+COPY ./cert/*.pem $NO_VNC_HOME/utils/websockify/
 ENV NO_VNC_CERT_FILE=self.pem
 
 # --------------------

@@ -27,7 +27,7 @@ You can change the default password via `VNC_PW` environment variable.
 
 ## Adding site.pem for enforcing HTTPS
 
-Add your `site.pem` to the `cert` folder. It will be used for enforcing HTTPS automaticaly.
+Add your `self.pem` to the `cert` folder. It will be used for enforcing HTTPS automaticaly.
 
 ## Other environment variables
 
@@ -35,6 +35,6 @@ You can change these default values via `docker run` `-e` option.
 
 ```bash
 NO_VNC_PORT=6901
-NO_VNC_CERT_FILE=site.pem
-BACKGROUND_COLOR=yellow #green, orange 
+NO_VNC_CERT_FILE=self.pem
+DESKTOP_BACKGROUND_COLOR=yellow #green, orange 
 ```

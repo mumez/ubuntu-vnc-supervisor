@@ -38,6 +38,7 @@ ENV STARTUPDIR=/usr/local/bin \
     VNC_COL_DEPTH=24 \
     VNC_PW=vncpassword \
     NO_VNC_HOME=/headless/noVNC \
+    BACKGROUND_COLOR=green \
     DEBIAN_FRONTEND=noninteractive
 
 # use older version of websockify to prevent hanging connections on offline containers, see https://github.com/ConSol/docker-headless-vnc-container/issues/50

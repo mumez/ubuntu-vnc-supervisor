@@ -14,11 +14,14 @@ x11vnc -storepasswd "$VNC_PW" "$PASSWD_PATH"
 chmod 600 $PASSWD_PATH
 
 Xvfb :0 -screen 0 1280x1220x24 -nolisten tcp 2>/dev/null &
+sleep 2
 x11vnc -display :0 -bg -listen 0.0.0.0 -rfbauth $PASSWD_PATH -forever -shared 2>/dev/null
+sleep 2
 DISPLAY=:0 icewm-session 2>/dev/null &
+sleep 2
 
-NO_VNC_CERT_FILE_PATH=$NO_VNC_HOME/utils/websockify/$NO_VNC_CERT_FILE 
 # Start noVNC
+NO_VNC_CERT_FILE_PATH=$NO_VNC_HOME/utils/websockify/$NO_VNC_CERT_FILE
 if [[ -f $NO_VNC_CERT_FILE_PATH ]]; then
   $NO_VNC_HOME/utils/launch.sh --vnc localhost:$VNC_PORT --listen $NO_VNC_PORT --ssl-only --cert $NO_VNC_CERT_FILE_PATH &> ~/no_vnc_startup.log &
 else

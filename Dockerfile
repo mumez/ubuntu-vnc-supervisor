@@ -1,10 +1,10 @@
-FROM ubuntu:bionic
+FROM ubuntu:20.04
 LABEL maintainer="Masashi Umezawa <ume@sorabito.com>"
 
 ENV DEBIAN_FRONTEND=noninteractive
 
 ## Install prerequisites and utilities
-RUN apt-get update && apt-get install -y \
+RUN apt update && apt install -y \
     software-properties-common \
     python3-software-properties \
     libssl-dev \
@@ -12,12 +12,12 @@ RUN apt-get update && apt-get install -y \
     libssh2-1 \
     supervisor \
     vim-tiny \
-    && rm -rf /var/lib/apt/lists/*
+  && rm -rf /var/lib/apt/lists/*
 
 # --------------------
 # VNC
 # --------------------
-RUN apt-get update && apt-get install -y \
+RUN apt update && apt install -y \
     xvfb \
     x11vnc \
     icewm \
@@ -56,6 +56,7 @@ COPY ./scripts/setup-wm.sh /usr/local/bin/
 COPY ./scripts/setup-vnc.sh /usr/local/bin/
 COPY ./scripts/setup-envs-all.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/setup-*.sh
+RUN ln -s /usr/bin/python2 /usr/bin/python
 
 # --------------------
 # Locale
@@ -71,6 +72,6 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 COPY images /root/images
 
-VOLUME [ "/root/data" ]
+VOLUME "/root/data"
 
-CMD [ "/bin/bash", "-l", "-c", "/usr/local/bin/setup-envs-all.sh && /usr/bin/supervisord -n" ]
+CMD ["/bin/bash", "-l", "-c", "/usr/local/bin/setup-envs-all.sh && /usr/bin/supervisord -n"]

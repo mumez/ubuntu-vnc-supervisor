@@ -26,6 +26,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   wget \
   net-tools \
   locales \
+  python3 \
+  python3-numpy \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 

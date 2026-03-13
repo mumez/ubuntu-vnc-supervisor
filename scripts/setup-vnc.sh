@@ -20,10 +20,12 @@ sleep 2
 DISPLAY=:0 icewm-session 2>/dev/null &
 sleep 2
 
-# Start noVNC
-NO_VNC_CERT_FILE_PATH=$NO_VNC_HOME/utils/websockify/$NO_VNC_CERT_FILE
-if [[ -f $NO_VNC_CERT_FILE_PATH ]]; then
-  $NO_VNC_HOME/utils/launch.sh --vnc localhost:$VNC_PORT --listen $NO_VNC_PORT --ssl-only --cert $NO_VNC_CERT_FILE_PATH &> ~/no_vnc_startup.log &
+# Start noVNC (noVNC v1.4.0+: use utils/novnc_proxy instead of utils/launch.sh)
+NO_VNC_CERT_FILE_PATH="$NO_VNC_HOME/utils/websockify/$NO_VNC_CERT_FILE"
+if [[ -f "$NO_VNC_CERT_FILE_PATH" ]]; then
+  # SSL enabled
+  "$NO_VNC_HOME/utils/novnc_proxy" --vnc "localhost:$VNC_PORT" --listen "$NO_VNC_PORT" --ssl-only --cert "$NO_VNC_CERT_FILE_PATH" &> ~/no_vnc_startup.log &
 else
-  $NO_VNC_HOME/utils/launch.sh --vnc localhost:$VNC_PORT --listen $NO_VNC_PORT &> ~/no_vnc_startup.log &
+  # HTTP only
+  "$NO_VNC_HOME/utils/novnc_proxy" --vnc "localhost:$VNC_PORT" --listen "$NO_VNC_PORT" &> ~/no_vnc_startup.log &
 fi

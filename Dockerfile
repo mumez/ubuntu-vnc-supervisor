@@ -1,4 +1,4 @@
-FROM ubuntu:24.04
+FROM ubuntu:26.04
 LABEL maintainer="Masashi Umezawa <ume@softumeya.com>"
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -43,8 +43,8 @@ ENV VNC_PW=vncpassword \
   DESKTOP_BACKGROUND_COLOR=yellow
 
 RUN mkdir -p $NO_VNC_HOME/utils/websockify && \
-  wget -qO- https://github.com/novnc/noVNC/archive/v1.4.0.tar.gz | tar xz --strip 1 -C $NO_VNC_HOME && \
-  wget -qO- https://github.com/novnc/websockify/archive/v0.11.0.tar.gz | tar xz --strip 1 -C $NO_VNC_HOME/utils/websockify && \
+  wget -qO- https://github.com/novnc/noVNC/archive/v1.7.0.tar.gz | tar xz --strip 1 -C $NO_VNC_HOME && \
+  wget -qO- https://github.com/novnc/websockify/archive/v0.13.0.tar.gz | tar xz --strip 1 -C $NO_VNC_HOME/utils/websockify && \
   ln -s $NO_VNC_HOME/vnc_lite.html $NO_VNC_HOME/index.html
 
 # add self.pem file if you force ssl only access

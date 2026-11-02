@@ -9,6 +9,17 @@ docker build -t ubuntu-vnc-supervisor .
 docker run --name my_ubuntu -d -p 5900:5900 -p 6901:6901 ubuntu-vnc-supervisor
 ```
 
+### Pull a pre-built image
+
+Images are published to Docker Hub and GitHub Container Registry.
+
+```bash
+docker pull mumez/ubuntu-vnc-supervisor:latest　# Docker Hub
+docker pull ghcr.io/mumez/ubuntu-vnc-supervisor:latest　#　or GHCR
+
+docker run --name my_ubuntu -d -p 5900:5900 -p 6901:6901 mumez/ubuntu-vnc-supervisor:latest
+```
+
 ## Access
 
 ### From VNC client

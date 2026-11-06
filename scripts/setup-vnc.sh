@@ -13,6 +13,11 @@ fi
 x11vnc -storepasswd "$VNC_PW" "$PASSWD_PATH"
 chmod 600 $PASSWD_PATH
 
+# Remove leftovers from before a container restart; Xvfb refuses to start if they remain.
+if ! pgrep -x Xvfb >/dev/null; then
+  rm -f /tmp/.X0-lock /tmp/.X11-unix/X0
+fi
+
 Xvfb :0 -screen 0 1280x1220x24 -nolisten tcp 2>/dev/null &
 sleep 2
 x11vnc -display :0 -bg -listen 0.0.0.0 -rfbauth $PASSWD_PATH -forever -shared 2>/dev/null
